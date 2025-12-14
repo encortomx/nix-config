@@ -1,0 +1,33 @@
+# Nix build results
+result
+result-*
+
+# Nix flake lock
+# Uncomment if you don't want to track lock file
+# flake.lock
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Nix garbage collection
+.nix-gc-roots
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Backup files
+*.bak
+*.backup
+
+# Local modifications
+local.nix
+secrets.nix
+
+# Logs
+*.log
