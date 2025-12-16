@@ -6,7 +6,7 @@
 
     settings = {
       user = {
-        name = "David Sanchez";
+        name = "David Sánchez";
         email = "sancheezpiiedra7@gmail.com";
       };
 
@@ -19,6 +19,11 @@
         last = "log -1 HEAD";
         lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
         history = "log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short";
+
+        # Identity switching aliases
+        whoami = "config --get-regexp ^user";
+        work = "!git config user.email 'david.sanchez@e1an1in.com' && git config user.name 'David Sanchez'";
+        personal = "!git config user.email 'sancheezpiiedra7@gmail.com' && git config user.name 'David Sánchez'";
       };
 
       init.defaultBranch = "main";
@@ -27,6 +32,9 @@
       core.editor = "vim";
       credential.helper = "osxkeychain";
       diff.colorMoved = "default";
+
+      commit.gpgsign = true;
+      gpg.program = "gpg";
 
       merge = {
         conflictstyle = "diff3";

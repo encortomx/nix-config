@@ -5,6 +5,8 @@
     ./packages.nix
     ./shell.nix
     ./programs/git.nix
+    ./programs/ghostty.nix
+    ./programs/1password.nix
     ../modules/kubernetes.nix
   ];
 

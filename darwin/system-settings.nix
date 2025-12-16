@@ -9,10 +9,35 @@
         show-recents = false;
         tilesize = 36;
         minimize-to-application = true;
-        persistent-apps = [];
+        persistent-apps = [
+          "/Applications/Zen.app"
+          "/Applications/Ghostty.app"
+          "/Applications/Spotify.app"
+          "/Applications/Google Chrome.app"
+          "/Applications/PhpStorm.app"
+          "/Applications/Cursor.app"
+          "/Applications/Visual Studio Code.app"
+          "/Applications/GitKraken.app"
+          "/Applications/Insomnia.app"
+          "/Applications/Slack.app"
+        ];
         persistent-others = [
-          "/Applications"
-          "~/Downloads"
+          {
+            folder = {
+              path = "/Applications";
+              arrangement = "name";
+              displayas = "folder";
+              showas = "grid";
+            };
+          }
+          {
+            folder = {
+              path = "/Users/davidsanchez/Downloads";
+              arrangement = "date-added";
+              displayas = "folder";
+              showas = "grid";
+            };
+          }
         ];
       };
 

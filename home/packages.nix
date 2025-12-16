@@ -26,6 +26,7 @@
     tree
     htop
     btop
+    starship
 
     # Development Languages - Go
     go
@@ -82,6 +83,10 @@
     gh
     git-lfs
     lazygit
+
+    # GPG & Security
+    gnupg
+    pinentry_mac
 
     # Text Processing
     gnused

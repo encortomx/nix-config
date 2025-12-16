@@ -15,7 +15,10 @@
   environment.systemPackages = with pkgs; [
     vim
     git
+    netbird-ui
   ];
+
+  services.netbird.enable = true;
 
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code

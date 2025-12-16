@@ -19,6 +19,10 @@
       "jetbrains-toolbox"
       "orbstack"
       "gitkraken"
+      "1password"
+      "1password-cli"
+      "claude"
+      "cleanshot"
 
       # PHP Development
       "herd"
@@ -43,10 +47,12 @@
 
       # Network & VPN
       "nordvpn"
-      "netbird-ui"
 
       # Additional Browsers
       "brave-browser"
+
+      # Entertainment
+      "spotify"
     ];
 
     brews = [
