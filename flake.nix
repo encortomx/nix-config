@@ -42,6 +42,8 @@
   outputs = { self, nixpkgs, nix-darwin, home-manager, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, netbird-tap, ... }@inputs:
   let
     username = "davidsanchez";
+    hostname = "MacBook-Pro-de-David";
+    system = "aarch64-darwin";
     darwinSystems = [ "aarch64-darwin" "x86_64-darwin" ];
 
     mkApp = scriptName: system: {
@@ -63,46 +65,44 @@
   {
     apps = nixpkgs.lib.genAttrs darwinSystems mkDarwinApps;
 
-    darwinConfigurations = nixpkgs.lib.genAttrs darwinSystems (system:
-      nix-darwin.lib.darwinSystem {
-        inherit system;
+    darwinConfigurations.${hostname} = nix-darwin.lib.darwinSystem {
+      inherit system;
 
-        specialArgs = { inherit inputs username; };
+      specialArgs = { inherit inputs username; };
 
-        modules = [
-          ./darwin/configuration.nix
+      modules = [
+        ./darwin/configuration.nix
 
-          home-manager.darwinModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              backupFileExtension = "hm-backup";
-              users.${username} = import ./home/home.nix;
-              extraSpecialArgs = { inherit inputs username; };
+        home-manager.darwinModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            backupFileExtension = "hm-backup";
+            users.${username} = import ./home/home.nix;
+            extraSpecialArgs = { inherit inputs username; };
+          };
+        }
+
+        nix-homebrew.darwinModules.nix-homebrew
+        {
+          nix-homebrew = {
+            enable = true;
+            enableRosetta = false;
+            user = username;
+            autoMigrate = true;
+            mutableTaps = false;
+            taps = {
+              "homebrew/homebrew-bundle" = homebrew-bundle;
+              "homebrew/homebrew-core" = homebrew-core;
+              "homebrew/homebrew-cask" = homebrew-cask;
+              "netbirdio/tap" = netbird-tap;
             };
-          }
+          };
+        }
+      ];
+    };
 
-          nix-homebrew.darwinModules.nix-homebrew
-          {
-            nix-homebrew = {
-              enable = true;
-              enableRosetta = false;
-              user = username;
-              autoMigrate = true;
-              mutableTaps = false;
-              taps = {
-                "homebrew/homebrew-bundle" = homebrew-bundle;
-                "homebrew/homebrew-core" = homebrew-core;
-                "homebrew/homebrew-cask" = homebrew-cask;
-                "netbirdio/tap" = netbird-tap;
-              };
-            };
-          }
-        ];
-      }
-    );
-
-    darwinPackages = self.darwinConfigurations."aarch64-darwin".pkgs;
+    darwinPackages = self.darwinConfigurations.${hostname}.pkgs;
   };
 }

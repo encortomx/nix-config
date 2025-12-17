@@ -32,9 +32,8 @@
       core.editor = "vim";
       credential.helper = "osxkeychain";
       diff.colorMoved = "default";
-
-      commit.gpgsign = true;
-      gpg.program = "gpg";
+      commit.gpgsign = false;
+      tag.gpgsign = false;
 
       merge = {
         conflictstyle = "diff3";

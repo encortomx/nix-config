@@ -6,7 +6,7 @@ let
     cat = "bat";
     z = "zoxide";
 
-    nix-update = "darwin-rebuild switch --flake ~/.config/nix";
+    nix-update = "darwin-rebuild switch --flake ~/.config/nix#MacBook-Pro-de-David";
     nix-clean = "nix-collect-garbage -d && sudo nix-collect-garbage -d";
     nix-search = "nix search nixpkgs";
     nix-list = "nix profile list";
@@ -31,6 +31,38 @@ in
     enable = true;
     enableZshIntegration = true;
     enableBashIntegration = true;
+    settings = {
+      git_commit = {
+        commit_hash_length = 7;
+        tag_symbol = " ";
+      };
+      git_status = {
+        conflicted = "=";
+        ahead = "⇡\${count}";
+        behind = "⇣\${count}";
+        diverged = "⇕⇡\${ahead_count}⇣\${behind_count}";
+        untracked = "?\${count}";
+        stashed = "$";
+        modified = "!\${count}";
+        staged = "+\${count}";
+        renamed = "»\${count}";
+        deleted = "✘\${count}";
+      };
+      username = {
+        style_user = "cyan bold";
+        style_root = "red bold";
+        format = "[\$user](\$style) on ";
+        disabled = false;
+        show_always = true;
+      };
+      custom.git_email = {
+        command = "git config user.email 2>/dev/null || echo 'no git'";
+        when = "git rev-parse --is-inside-work-tree 2>/dev/null";
+        format = "on [\$output](\$style) ";
+        style = "bright-yellow";
+        shell = ["sh"];
+      };
+    };
   };
 
   programs.direnv = {
@@ -81,6 +113,7 @@ in
 
     oh-my-zsh = {
       enable = true;
+      theme = "";
       plugins = [
         "1password"
         "argocd"
