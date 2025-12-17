@@ -19,6 +19,7 @@
       "jetbrains-toolbox"
       "orbstack"
       "gitkraken"
+      "gitkraken-cli"
       "1password"
       "1password-cli"
       "claude"
@@ -55,8 +56,7 @@
       "spotify"
     ];
 
-    brews = [
-    ];
+    brews = [];
 
     masApps = {
     };

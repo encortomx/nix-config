@@ -29,22 +29,10 @@
     starship
 
     # Development Languages - Go
-    go
     gopls
     gotools
     golangci-lint
     delve
-
-    # Node.js ecosystem
-    nodejs_22
-    bun
-    yarn
-
-    # Python
-    python312
-    python312Packages.pip
-    python312Packages.virtualenv
-    poetry
 
     # Rust
     rustc
@@ -83,6 +71,7 @@
     gh
     git-lfs
     lazygit
+    mise
 
     # GPG & Security
     gnupg

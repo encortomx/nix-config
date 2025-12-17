@@ -103,6 +103,8 @@ in
     initExtra = ''
       export PATH="$HOME/.local/bin:/run/current-system/sw/bin:$HOME/.nix-profile/bin:$PATH"
       export GPG_TTY=$(tty)
+
+      eval "$(mise activate bash)"
     '';
   };
 
@@ -136,6 +138,12 @@ in
     initContent = ''
       export PATH="$HOME/.local/bin:/run/current-system/sw/bin:$HOME/.nix-profile/bin:$PATH"
       export GPG_TTY=$(tty)
+
+      eval "$(mise activate zsh)"
+
+      unalias gk 2>/dev/null || true
+      GK_BIN=$(find /opt/homebrew/Caskroom/gitkraken-cli -name "gk" -type f 2>/dev/null | head -1)
+      [ -n "$GK_BIN" ] && export PATH="$(dirname "$GK_BIN"):$PATH"
 
       [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
     '';

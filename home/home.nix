@@ -1,4 +1,4 @@
-{ config, pkgs, username, ... }:
+{ config, pkgs, lib, username, ... }:
 
 {
   imports = [
@@ -21,12 +21,25 @@
     VISUAL = "code";
   };
 
+  home.sessionPath = [
+    "$HOME/.local/share/mise/shims"
+    "$HOME/.local/bin"
+  ];
+
   home.file.".ssh/.keep".text = "";
 
   home.activation.backupSsh = ''
     if [ ! -d "$HOME/.ssh.backup" ] && [ -d "$HOME/.ssh" ]; then
       echo "Creating SSH backup..."
       cp -r "$HOME/.ssh" "$HOME/.ssh.backup"
+    fi
+  '';
+
+  home.activation.miseInstall = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    PATH="${pkgs.mise}/bin:$PATH"
+    if command -v mise &> /dev/null; then
+      echo "Installing mise tools..."
+      $DRY_RUN_CMD mise install
     fi
   '';
 }
