@@ -37,9 +37,14 @@
       url = "github:netbirdio/homebrew-tap";
       flake = false;
     };
+
+    encoredev-tap = {
+      url = "github:encoredev/homebrew-tap";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, nix-darwin, home-manager, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, netbird-tap, ... }@inputs:
+  outputs = { self, nixpkgs, nix-darwin, home-manager, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, netbird-tap, encoredev-tap, ... }@inputs:
   let
     username = "davidsanchez";
     hostname = "MacBook-Pro-de-David";
@@ -97,6 +102,7 @@
               "homebrew/homebrew-core" = homebrew-core;
               "homebrew/homebrew-cask" = homebrew-cask;
               "netbirdio/tap" = netbird-tap;
+              "encoredev/homebrew-tap" = encoredev-tap;
             };
           };
         }

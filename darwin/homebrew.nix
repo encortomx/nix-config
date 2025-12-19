@@ -56,7 +56,9 @@
       "spotify"
     ];
 
-    brews = [];
+    brews = [
+      "encore"
+    ];
 
     masApps = {
     };
