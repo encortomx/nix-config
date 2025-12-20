@@ -89,10 +89,13 @@
 
       CustomUserPreferences = {
         "com.apple.finder" = {
-          ShowExternalHardDrivesOnDesktop = false;
-          ShowHardDrivesOnDesktop = false;
-          ShowMountedServersOnDesktop = false;
-          ShowRemovableMediaOnDesktop = false;
+          ShowExternalHardDrivesOnDesktop = true;
+          ShowHardDrivesOnDesktop = true;
+          ShowMountedServersOnDesktop = true;
+          ShowRemovableMediaOnDesktop = true;
+          FXICloudDriveDesktop = true;
+          FXICloudDriveDocuments = true;
+          FXICloudDriveEnabled = true;
         };
 
         "com.apple.desktopservices" = {
