@@ -42,7 +42,7 @@ in
         behind = "⇣\${count}";
         diverged = "⇕⇡\${ahead_count}⇣\${behind_count}";
         untracked = "?\${count}";
-        stashed = "$";
+        stashed = "\${count}";
         modified = "!\${count}";
         staged = "+\${count}";
         renamed = "»\${count}";
@@ -70,6 +70,23 @@ in
     enableZshIntegration = true;
     enableBashIntegration = true;
     nix-direnv.enable = true;
+
+    config = {
+      global = {
+        strict_env = true;
+      };
+    };
+
+    stdlib = ''
+      layout_devenv() {
+        if [ ! -f devenv.nix ]; then
+          echo "devenv.nix not found. Use 'devenv init' to create one."
+          return 1
+        fi
+
+        eval "$(devenv print-dev-env)"
+      }
+    '';
   };
 
   programs.atuin = {
@@ -103,8 +120,6 @@ in
     initExtra = ''
       export PATH="$HOME/.local/bin:/run/current-system/sw/bin:$HOME/.nix-profile/bin:$PATH"
       export GPG_TTY=$(tty)
-
-      eval "$(mise activate bash)"
     '';
   };
 
@@ -135,11 +150,15 @@ in
       ];
     };
 
-    initContent = ''
+    loginExtra = ''
+      if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+        . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+      fi
+    '';
+
+    initExtra = ''
       export PATH="$HOME/.local/bin:/run/current-system/sw/bin:$HOME/.nix-profile/bin:$PATH"
       export GPG_TTY=$(tty)
-
-      eval "$(mise activate zsh)"
 
       unalias gk 2>/dev/null || true
       GK_BIN=$(find /opt/homebrew/Caskroom/gitkraken-cli -name "gk" -type f 2>/dev/null | head -1)

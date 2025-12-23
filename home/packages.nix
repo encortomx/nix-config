@@ -71,7 +71,7 @@
     gh
     git-lfs
     lazygit
-    mise
+    devenv
 
     # GPG & Security
     gnupg
